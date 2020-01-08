@@ -4,7 +4,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import './components/Header.dart';
 import './components/CatFace.dart';
 
-List dHistory = ['2020-1-8 15:00'];
+const List<String> dHistory = [
+  '2020-1-8 15:00',
+  '2020-1-9 16:44',
+  '2020-1-10 14:20'
+];
 List mHistory = List();
 
 void dailyHistory() {
@@ -136,11 +140,31 @@ class _CleaningHistoryState extends State<CleaningHistory>
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: <Widget>[
-                                        Text(dailyHistoryState[0]),
+                                        Text(dHistory[2]),
                                         IconContent(
                                             icon: FontAwesomeIcons.trashAlt),
                                       ],
-                                    )
+                                    ),
+                                    SizedBox(height: 15.0),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        Text(dHistory[1]),
+                                        IconContent(
+                                            icon: FontAwesomeIcons.trashAlt),
+                                      ],
+                                    ),
+                                    SizedBox(height: 15.0),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        Text(dHistory[0]),
+                                        IconContent(
+                                            icon: FontAwesomeIcons.trashAlt),
+                                      ],
+                                    ),
                                   ],
                                 ),
                                 decoration: BoxDecoration(
@@ -213,6 +237,9 @@ class IconContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Icon(icon);
+    return Icon(
+      icon,
+      color: Colors.grey,
+    );
   }
 }
