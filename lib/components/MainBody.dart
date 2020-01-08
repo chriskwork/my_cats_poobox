@@ -72,6 +72,7 @@ class _MainBodyState extends State<MainBody> {
                       onPressed: () {
                         selectedBtn = CleanedBtn.daily;
                         btnTextChange('Registed to history!', 'Done Today!');
+                        dailyHistory();
                       },
                       child: Text(
                         todayBtnText,
@@ -101,6 +102,7 @@ class _MainBodyState extends State<MainBody> {
                         selectedBtn = CleanedBtn.monthly;
                         btnTextChange(
                             'Registed to history!', 'Done This Month!');
+                        monthlyHistory();
                       },
                       child: Text(
                         monthBtnText,

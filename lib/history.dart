@@ -1,8 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import './components/Header.dart';
 import './components/CatFace.dart';
-import './components/TwitterLink.dart';
+
+List dHistory = ['2020-1-8 15:00'];
+List mHistory = List();
+
+void dailyHistory() {
+  var date = DateTime.now().toString();
+  dHistory.add(date);
+  print(dHistory.length);
+}
+
+void monthlyHistory() {
+  var date = DateTime.now().toString();
+
+  mHistory.add(date);
+  print(mHistory);
+}
+
+Text dailyHistoryList() {
+  if (dHistory.length > 0) {
+    for (var i = 0; i < dHistory.length; i++) {
+      return Text(dHistory[i]);
+    }
+  }
+  return Text('history is empty');
+}
+
+Text monthlyHistoryList() {
+  if (dHistory.length > 0) {
+    for (var i = 0; i < dHistory.length; i++) {
+      return Text(mHistory[i]);
+    }
+  }
+  return Text('history is empty');
+}
 
 class CleaningHistory extends StatefulWidget {
   @override
@@ -12,6 +46,9 @@ class CleaningHistory extends StatefulWidget {
 class _CleaningHistoryState extends State<CleaningHistory>
     with TickerProviderStateMixin {
   TabController _tabController;
+
+  var dailyHistoryState = dHistory;
+  var monthlyHistoryState = mHistory;
 
   @override
   void initState() {
@@ -61,13 +98,26 @@ class _CleaningHistoryState extends State<CleaningHistory>
                         Expanded(
                           flex: 1,
                           child: TabBar(
+                            unselectedLabelColor: Colors.grey,
+                            labelColor: Color(0xFF00796B),
+                            indicatorColor: Color(0xFFfff8e1),
+                            labelStyle: TextStyle(
+                              fontFamily: 'Poppins',
+                            ),
+                            indicator: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(10),
+                                topRight: Radius.circular(10),
+                              ),
+                              color: Color(0xFFfff8e1),
+                            ),
                             controller: _tabController,
                             tabs: <Widget>[
                               Tab(
-                                text: '11',
+                                text: 'Daily Cleaning',
                               ),
                               Tab(
-                                text: '22',
+                                text: 'Monthly Cleaning',
                               ),
                             ],
                           ),
@@ -78,16 +128,58 @@ class _CleaningHistoryState extends State<CleaningHistory>
                             controller: _tabController,
                             children: <Widget>[
                               Container(
-                                child: Text('hello1'),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 30.0, vertical: 15.0),
+                                child: Column(
+                                  children: <Widget>[
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        Text(dailyHistoryState[0]),
+                                        IconContent(
+                                            icon: FontAwesomeIcons.trashAlt),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Color(0xFFfff8e1),
+                                ),
                               ),
                               Container(
-                                child: Text('hello2'),
+                                padding: EdgeInsets.all(15.0),
+                                child: Column(
+                                  children: <Widget>[],
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Color(0xFFfff8e1),
+                                ),
                               ),
                             ],
                           ),
                         ),
                         Expanded(
-                          child: Text('Remove all histories'),
+                          child: Container(
+                            width: double.infinity,
+                            height: double.infinity,
+                            decoration: BoxDecoration(
+                              color: Color(0xFFfff8e1),
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(10),
+                                bottomRight: Radius.circular(10),
+                              ),
+                            ),
+                            child: Center(
+                              child: Text(
+                                'Remove all histories',
+                                style: TextStyle(
+                                  color: Colors.red,
+                                  fontFamily: 'Poppins',
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -96,10 +188,31 @@ class _CleaningHistoryState extends State<CleaningHistory>
               ),
             ),
 
-            TwitterLink(),
+            Expanded(
+              child: Center(
+                child: IconButton(
+                  icon: Icon(FontAwesomeIcons.arrowLeft),
+                  color: Colors.white,
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ),
+            ),
           ],
         ),
       ),
     ));
+  }
+}
+
+class IconContent extends StatelessWidget {
+  IconContent({this.icon});
+
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return Icon(icon);
   }
 }
